@@ -1,7 +1,7 @@
 [package]
 name = "mtproto-client-rust"
 version = "0.1.0"
-edition = "2021"
+edition = "2026"
 rust-version = "1.80"
 description = "Client-side MTProto proxy transport for Telegram in Rust: 1:1 port of Telethon's ConnectionTcpMTProxyRandomizedIntermediate (AES-256-CTR obfuscation, randomized intermediate framing, tokio codec + optional grammers Transport)"
 license = "MIT"
