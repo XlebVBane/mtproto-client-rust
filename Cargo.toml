@@ -1,0 +1,40 @@
+[package]
+name = "mtproto-client-rust"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.80"
+description = "Client-side MTProto proxy transport for Telegram in Rust: 1:1 port of Telethon's ConnectionTcpMTProxyRandomizedIntermediate (AES-256-CTR obfuscation, randomized intermediate framing, tokio codec + optional grammers Transport)"
+license = "MIT"
+repository = "https://github.com/yourname/mtproto-client-rust"
+documentation = "https://docs.rs/mtproto-client-rust"
+readme = "README.md"
+keywords = ["telegram", "mtproto", "mtproxy", "proxy", "telethon"]
+categories = ["network-programming"]
+
+# Зависимости подобраны совместимыми с grammers 0.12 (aes 0.8 / ctr 0.9),
+# чтобы крейт можно было использовать ВМЕСТЕ с grammers в одном проекте.
+[dependencies]
+aes = "0.8"
+ctr = "0.9"
+sha2 = "0.10"
+rand = "0.8"
+bytes = "1"
+tokio = { version = "1", features = ["net", "io-util", "time"] }
+tokio-util = { version = "0.7", features = ["codec"] }
+
+# Опциональный мостик: реализация трейта grammers_mtproto::transport::Transport.
+[dependencies.grammers-mtproto]
+version = "0.12"
+optional = true
+
+[features]
+default = []
+grammers = ["dep:grammers-mtproto"]
+
+[dev-dependencies]
+futures-util = { version = "0.3", default-features = false, features = ["sink"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "io-util", "time"] }
+tokio-stream = "0.1"
+
+[package.metadata.docs.rs]
+all-features = true
